@@ -1,0 +1,44 @@
+.container-fluid {
+  height: 100vh !important;
+  background-color: #343A40;
+}
+.social-space {
+  min-height: 300px;
+  flex-direction: column;
+}
+.social-space h1 {
+  color: white;
+  font-style: italic;
+}
+
+.btn.btn-fb, 
+.btn.btn-g, 
+.btn.btn-tw {
+  width: 300px;
+  margin: 10px;
+  outline: none;
+  border:none;
+  box-shadow: 2px 3px 8px rgb(36, 36, 36);
+  color: white;
+  padding: 10px;
+  transition: linear .5s all;
+}
+
+.btn.btn-fb {
+  background-color: #4267B2;
+}
+.btn.btn-tw {
+  background-color: #1DA1F2;
+}
+.btn.btn-g {
+  background-color: #DD4D42;
+}
+.btn.btn-fb:hover {
+  background-color: rgb(36, 66, 128);
+}
+.btn.btn-tw:hover {
+  background-color: rgb(3, 117, 187);
+}
+.btn.btn-g:hover {
+  background-color: rgb(150, 39, 31);
+}

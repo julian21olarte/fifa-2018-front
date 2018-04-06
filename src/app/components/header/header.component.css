@@ -1,0 +1,12 @@
+.user-image {
+  width: 48px;
+}
+.user-name {
+  text-transform: capitalize;
+}
+.dropdown-toggle::after {
+  display:none
+}
+.navbar-img {
+  width: 64px;
+}

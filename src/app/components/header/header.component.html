@@ -1,0 +1,29 @@
+<nav *ngIf="router.url !='/login'" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top justify-content-between">
+  <img class="navbar-img" src="https://1.bp.blogspot.com/-eTrcyJyDNTM/WU_KklrwBiI/AAAAAAABJvY/I3uQf1zemb8U2vCIonTtKN8qxVpoIHovQCLcBGAs/s1600/Copa%2BMundial%2BRusia%2B2018%2B256x.png" alt="">
+  <a class="navbar-brand" href="#">FIFA RUSSIA 2018</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto">
+      <li *ngIf="!currentUser" class="nav-item">
+        <a class="nav-link" routerLink="/login">ENTRAR</a>
+      </li>
+      <li *ngIf="currentUser" class="nav-item">
+          <a class="nav-link user-name" routerLink="/profile">{{currentUser.name}}</a>
+      </li>
+      <!--<li *ngIf="currentUser" class="nav-item">
+        <a routerLink="/profile"><img class="rounded-circle user-image" src="{{currentUser.image}}" alt="user-image"></a>
+      </li>-->
+      <li class="nav-item dropdown" *ngIf="currentUser">
+        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img class="rounded-circle user-image" src="{{currentUser.image}}" alt="user-image">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Mi perfil</a>
+          <a class="dropdown-item" href="#">Salir</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
