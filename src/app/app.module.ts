@@ -13,6 +13,8 @@ import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { GamesComponent } from './components/games/games.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { HeaderComponent } from './components/header/header.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    GamesComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

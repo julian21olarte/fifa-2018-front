@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="user-info" *ngIf="currentUser">
+        <div class="row">
+          <div class="col-sm-12 col-md-3">
+            <img src="{{currentUser.image}}" alt="user-img" class="rounded user-img-profile">
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <h3>{{currentUser.name}}</h3>
+            <h5>{{currentUser.email}}</h5>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <h5>Cuenta: <span  class="text-success">${{currentUser.bill}} dolares</span></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+.container {
+  margin-top: 80px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.user-img-profile {
+  width: 150px;
+}

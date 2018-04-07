@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
       if (user) {
         this.router.navigate(['/home']);
       } else {
-        alert('error an la autenticacion');
+        alert('error en la autenticacion');
       }
     });
   }
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         console.log(user);
         this.router.navigate(['/home']);
       } else {
-        alert('error an la autenticacion');
+        alert('error en la autenticacion');
       }
     });
   }
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         console.log(user);
         this.router.navigate(['/home']);
       } else {
-        alert('error an la autenticacion');
+        alert('error en la autenticacion');
       }
     });
   }

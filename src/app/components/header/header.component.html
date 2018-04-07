@@ -5,6 +5,11 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav" *ngIf="currentUser">
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/games">Partidos</a>
+      </li>
+    </ul>
     <ul class="navbar-nav ml-auto">
       <li *ngIf="!currentUser" class="nav-item">
         <a class="nav-link" routerLink="/login">ENTRAR</a>
@@ -12,16 +17,13 @@
       <li *ngIf="currentUser" class="nav-item">
           <a class="nav-link user-name" routerLink="/profile">{{currentUser.name}}</a>
       </li>
-      <!--<li *ngIf="currentUser" class="nav-item">
-        <a routerLink="/profile"><img class="rounded-circle user-image" src="{{currentUser.image}}" alt="user-image"></a>
-      </li>-->
       <li class="nav-item dropdown" *ngIf="currentUser">
         <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img class="rounded-circle user-image" src="{{currentUser.image}}" alt="user-image">
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Mi perfil</a>
-          <a class="dropdown-item" href="#">Salir</a>
+          <a class="dropdown-item" routerLink="/profile">Mi perfil</a>
+          <a class="dropdown-item" (click)="logout()">Salir</a>
         </div>
       </li>
     </ul>

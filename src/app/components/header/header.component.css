@@ -10,3 +10,7 @@
 .navbar-img {
   width: 64px;
 }
+
+.navbar-nav a {
+  cursor: pointer;
+}
