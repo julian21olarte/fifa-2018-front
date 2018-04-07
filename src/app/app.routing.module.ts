@@ -1,3 +1,5 @@
+import { AddGameComponent } from './components/add-game/add-game.component';
+import { GamesComponent } from './components/games/games.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
@@ -9,6 +11,12 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'games',
+    children: [
+      { path: '', component: GamesComponent },
+      { path: 'add', component: AddGameComponent },
+    ]
+  },
   { path: '**', component: HomeComponent }
 ];
 

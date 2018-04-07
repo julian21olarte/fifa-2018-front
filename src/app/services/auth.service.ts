@@ -24,41 +24,41 @@ export class AuthService {
 
   public loginFacebook() {
     return this.fireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-    .then(response => this.loginUser())
-    .then(user => {
-      this.setCurrentUser(user);
-      return user;
-    })
-    .catch(error => {
-      console.log(error);
-      return this.loginErrorHandler(error);
-    });
+      .then(response => this.loginUser())
+      .then(user => {
+        this.setCurrentUser(user);
+        return user;
+      })
+      .catch(error => {
+        console.log(error);
+        return this.loginErrorHandler(error);
+      });
   }
 
 
   public loginTwitter() {
     return this.fireAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider())
-    .then(response => this.loginUser())
-    .then(user => {
-      this.setCurrentUser(user);
-      return user;
-    })
-    .catch(error => {
-      return this.loginErrorHandler(error);
-    });
+      .then(response => this.loginUser())
+      .then(user => {
+        this.setCurrentUser(user);
+        return user;
+      })
+      .catch(error => {
+        return this.loginErrorHandler(error);
+      });
   }
 
 
   public loginGoogle() {
     return this.fireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then(response => this.loginUser())
-    .then(user => {
-      this.setCurrentUser(user);
-      return user;
-    })
-    .catch(error => {
-      return this.loginErrorHandler(error);
-    });
+      .then(response => this.loginUser())
+      .then(user => {
+        this.setCurrentUser(user);
+        return user;
+      })
+      .catch(error => {
+        return this.loginErrorHandler(error);
+      });
   }
 
   private loginUser() {
@@ -67,16 +67,16 @@ export class AuthService {
         if (localStorage.getItem('currentUser') !== null) {
           return this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         }
-        return this.http.post(this.api, {id: idToken}).toPromise()
-        .then(user => {
-          console.log(this.fireAuth.auth.currentUser);
-          this.currentUser = user;
-          this.currentUser.name = this.fireAuth.auth.currentUser.displayName;
-          this.currentUser.email = this.fireAuth.auth.currentUser.email;
-          this.currentUser.image = this.fireAuth.auth.currentUser.photoURL;
-          localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-          return this.currentUser;
-        });
+        return this.http.post(this.api, { id: idToken }).toPromise()
+          .then(user => {
+            console.log(this.fireAuth.auth.currentUser);
+            this.currentUser = user;
+            this.currentUser.name = this.fireAuth.auth.currentUser.displayName;
+            this.currentUser.email = this.fireAuth.auth.currentUser.email;
+            this.currentUser.image = this.fireAuth.auth.currentUser.photoURL;
+            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+            return this.currentUser;
+          });
       });
   }
 
@@ -91,34 +91,34 @@ export class AuthService {
   }
   private loginIfExistProvider(email: string, credential: AuthCredential) {
     return this.fireAuth.auth.fetchProvidersForEmail(email)
-    .then(providers => {
-      if (providers.length) {
-        let provider = null;
-        switch (providers[0]) {
-          case 'twitter.com': provider = new firebase.auth.TwitterAuthProvider(); break;
-          case 'facebook.com': provider = new firebase.auth.FacebookAuthProvider(); break;
-          case 'github.com': provider = new firebase.auth.GithubAuthProvider(); break;
-          case 'google.com': provider = new firebase.auth.GoogleAuthProvider(); break;
+      .then(providers => {
+        if (providers.length) {
+          let provider = null;
+          switch (providers[0]) {
+            case 'twitter.com': provider = new firebase.auth.TwitterAuthProvider(); break;
+            case 'facebook.com': provider = new firebase.auth.FacebookAuthProvider(); break;
+            case 'github.com': provider = new firebase.auth.GithubAuthProvider(); break;
+            case 'google.com': provider = new firebase.auth.GoogleAuthProvider(); break;
+          }
+          if (provider) {
+            provider.setCustomParameters({ login_hint: email });
+            return this.fireAuth.auth.signInWithPopup(provider)
+              .then(resp =>
+                this.fireAuth.auth.currentUser.linkWithCredential(credential)
+                  .then(response => this.loginUser())
+                  .then(user => {
+                    this.setCurrentUser(user);
+                    return user;
+                  }));
+          }
+        } else {
+          alert('Error obteniendo los proveedores de autenticacion.');
         }
-        if (provider) {
-          provider.setCustomParameters({login_hint: email});
-          return this.fireAuth.auth.signInWithPopup(provider)
-          .then(resp =>
-            this.fireAuth.auth.currentUser.linkWithCredential(credential)
-            .then(response => this.loginUser())
-            .then(user => {
-              this.setCurrentUser(user);
-              return user;
-            }));
-        }
-      } else {
+      })
+      .catch(error => {
+        console.log(error);
         alert('Error obteniendo los proveedores de autenticacion.');
-      }
-    })
-    .catch(error => {
-      console.log(error);
-      alert('Error obteniendo los proveedores de autenticacion.');
-    });
+      });
   }
 
   public logout() {
@@ -128,8 +128,12 @@ export class AuthService {
     }
   }
 
-  public getCurrentUser(): Observable<any> {
-    return this.currentUserObservable.asObservable();
+  public getCurrentTokenId() {
+    return this.fireAuth.auth.currentUser.getIdToken(false);
+  }
+
+  public getCurrentUser() {
+    return this.currentUserObservable;
   }
   private setCurrentUser(user: any = null) {
     this.currentUserObservable.next(user);

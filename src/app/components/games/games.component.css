@@ -1,0 +1,17 @@
+.container {
+  margin-top: 80px;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.bet-button {
+  box-shadow: 2px 2px 5px lightgray;
+}
+
+.card-footer-game-block {
+  margin-bottom: 15px;
+}
+
+.new-game-button {
+  margin: 15px 0;
+}

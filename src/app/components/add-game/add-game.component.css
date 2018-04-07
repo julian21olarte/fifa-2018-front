@@ -1,0 +1,14 @@
+.container {
+  margin-top: 80px;
+  box-sizing: border-box;
+  padding: 15px;
+}
+.addGameForm {
+  border: 1px solid lightgray;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.addGameForm h1 {
+  font-style: italic;
+}

@@ -1,7 +1,11 @@
+import { GameService } from './services/game.service';
 import { AppRoutingModule } from './app.routing.module';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MomentModule } from 'angular2-moment';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbModule, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppComponent } from './app.component';
@@ -17,6 +21,15 @@ import { GamesComponent } from './components/games/games.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 
+// Moment setup
+import * as moment from 'moment';
+import 'moment/min/locales';
+import { AddGameComponent } from './components/add-game/add-game.component';
+import { FormsModule } from '@angular/forms';
+import { TeamService } from './services/team.service';
+
+moment.locale('es-es');
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,17 +37,24 @@ import { ProfileComponent } from './components/profile/profile.component';
     HomeComponent,
     HeaderComponent,
     GamesComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddGameComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireAuthModule,
     HttpClientModule,
+    MomentModule,
+    NgSelectModule,
+    FormsModule,
+    NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [
-    AuthService
+    AuthService,
+    GameService,
+    TeamService
   ],
   bootstrap: [AppComponent]
 })
