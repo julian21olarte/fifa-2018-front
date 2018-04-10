@@ -30,7 +30,7 @@
               </p>
             </div>
           </div>
-          <button *ngIf="currentUser && game.status === 'Comming Soon'" type="button" class="btn btn-success btn-circle float-right bet-button">
+          <button *ngIf="currentUser && game.status === 'Comming Soon'" type="button" class="btn btn-success btn-circle float-right bet-button" [routerLink]="['/bet']" [queryParams] = "{gameId: game._id}">
             <span class="fa fa-usd" aria-hidden="true"></span>
           </button>
         </div>

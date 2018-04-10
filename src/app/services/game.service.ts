@@ -15,6 +15,10 @@ export class GameService {
     return this.http.get(this.api);
   }
 
+  public getGameById(id: number) {
+    return this.http.get(this.api + '/' + id);
+  }
+
   public saveGame(game: any): any {
     return Observable.fromPromise(
       this.authService.getCurrentTokenId()

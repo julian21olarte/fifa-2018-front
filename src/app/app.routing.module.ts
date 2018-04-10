@@ -1,3 +1,4 @@
+import { AddBetComponent } from './components/add-bet/add-bet.component';
 import { AddGameComponent } from './components/add-game/add-game.component';
 import { GamesComponent } from './components/games/games.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'bet', component: AddBetComponent},
   { path: 'games',
     children: [
       { path: '', component: GamesComponent },

@@ -1,0 +1,11 @@
+.container-fluid {
+  margin-top: 80px;
+  box-sizing: border-box;
+  padding: 15px;
+}
+.noUi-connect {
+  background: purple !important;
+}
+.bill-info {
+  box-shadow: 2px 3px 6px lightgray;
+}

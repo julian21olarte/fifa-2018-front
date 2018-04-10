@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { MomentModule } from 'angular2-moment';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NouisliderModule } from 'ng2-nouislider';
 
 
 import { AppComponent } from './app.component';
@@ -50,6 +51,7 @@ moment.locale('es-es');
     MomentModule,
     NgSelectModule,
     FormsModule,
+    NouisliderModule,
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],

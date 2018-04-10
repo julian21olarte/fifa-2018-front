@@ -1,3 +1,57 @@
-<p>
-  add-bet works!
-</p>
+<div class="container-fluid w-100" *ngIf="currentUser">
+  <div class="row w-100">
+    <div class="col-12 w-100">
+      <div class="card float-right w-100 bill-info" *ngIf="currentUser">
+        <div class="card-body w-100">
+          Tu saldo es
+          <h4 class="text-success d-inline">${{currentUser.bill}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center" *ngIf="game">
+      <div class="card">
+        <div class="card-body">
+          <h4>{{game.team1.name}} VS {{game.team2.name}}</h4>
+          <div class="d-flex justify-content-around">
+            <img src="{{game.team1.img}}" alt="team1-img" class="team-img">
+            <img src="{{game.team2.img}}" alt="team2-img" class="team-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <h3 class="text-primary text-center text-md-left mt-4">Cuotas</h3>
+    </div>
+    <table class="table table-bordered" *ngIf="game">
+      <thead>
+        <tr>
+          <th class="text-center">{{game.team1.name}}</th>
+          <th class="text-center">{{game.team2.name}}</th>
+          <th class="text-center">Empate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center">{{game.fees.team1}}</td>
+          <td class="text-center">{{game.fees.team2}}</td>
+          <td class="text-center">6.5</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="card" *ngIf="currentUser">
+        <div class="card-body">
+          <nouislider [connect]="[true, false]" [min]="0" [tooltips]="[true]" [max]="currentUser.bill" [(ngModel)]="betValue"></nouislider>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
