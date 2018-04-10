@@ -27,6 +27,7 @@ import 'moment/min/locales';
 import { AddGameComponent } from './components/add-game/add-game.component';
 import { FormsModule } from '@angular/forms';
 import { TeamService } from './services/team.service';
+import { AddBetComponent } from './components/add-bet/add-bet.component';
 
 moment.locale('es-es');
 
@@ -38,7 +39,8 @@ moment.locale('es-es');
     HeaderComponent,
     GamesComponent,
     ProfileComponent,
-    AddGameComponent
+    AddGameComponent,
+    AddBetComponent
   ],
   imports: [
     BrowserModule,

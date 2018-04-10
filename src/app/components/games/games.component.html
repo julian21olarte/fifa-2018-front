@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row" *ngIf="currentUser.isAdmin && currentUser.isAdmin === true">
+  <div class="row" *ngIf="currentUser && currentUser.isAdmin && currentUser.isAdmin === true">
     <div class="col-sm-12">
       <a routerLink="add" class="btn btn-primary new-game-button float-right">Nuevo Partido</a>
     </div>
@@ -9,33 +9,30 @@
       <div class="card">
         <div class="card-body">
           <h5 class="text-center">{{game.team1.name}} VS {{game.team2.name}}</h5>
-          <div class="w-100 h-auto d-flex justify-content-between">
+          <div class="w-100 h-auto d-flex justify-content-between align-items-center">
             <img src="{{game.team1.img}}" alt="team1-img" class="team-img">
+            <p class="font-weight-bold" *ngIf="game.team1Goals && game.team2Goals">{{game.team1Goals}} - {{game.team2Goals}}</p>
             <img src="{{game.team2.img}}" alt="team2-img" class="team-img">
           </div>
         </div>
         <div class="card-footer">
-         <div class="card-footer-game-block">
+          <div class="card-footer-game-block">
             <div class="card-footer-game-text">
-              <h6 class="d-inline">Estado: </h6> <p class="d-inline" [ngClass]="{'text-danger': game.status === 'Comming Soon', 'text-success': game.status === 'Finalized'}">{{game.status}}</p>
+              <h6 class="d-inline">Estado: </h6>
+              <p class="d-inline" [ngClass]="{'text-danger': game.status === 'Comming Soon', 'text-success': game.status === 'Finalized'}">{{game.status}}</p>
             </div>
             <div class="card-footer-game-text">
               <!--<h6 class="d-inline">Fecha: </h6> <p class="d-inline">{{(game.date | amCalendar:{sameElse: 'D/M/YYYY - h:mm A', nextWeek: '[Este] dddd [a las] h:mm A'} )}}</p>-->
-              <h6 class="d-inline">Fecha: </h6> 
+              <h6 class="d-inline">Fecha: </h6>
               <p class="d-inline">
-                {{game.date | amCalendar:
-                  {
-                    sameDay: '[Hoy a las] h:mm A',
-                    nextDay: '[Mañana a las] h:mm A',
-                    nextWeek: 'dddd D [de] MMMM - h:mm A',
-                    lastDay: '[Ayer]',
-                    sameElse: 'D/M/YYYY - h:mm A'
-                  } 
-                }}
+                {{game.date | amCalendar: { sameDay: '[Hoy a las] h:mm A', nextDay: '[Mañana a las] h:mm A', nextWeek: 'dddd D [de] MMMM
+                - h:mm A', lastDay: '[Ayer]', sameElse: 'dddd D [de] MMMM - h:mm A' } }}
               </p>
             </div>
-         </div>
-          <button *ngIf="currentUser" type="button" class="btn btn-success btn-circle float-right bet-button"><span class="fa fa-usd" aria-hidden="true"></span></button>
+          </div>
+          <button *ngIf="currentUser && game.status === 'Comming Soon'" type="button" class="btn btn-success btn-circle float-right bet-button">
+            <span class="fa fa-usd" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
     </div>
