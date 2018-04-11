@@ -135,6 +135,13 @@ export class AuthService {
   public getCurrentUser() {
     return this.currentUserObservable;
   }
+
+  public updateCurrentUserBill(bill: number) {
+    this.currentUser.bill = bill;
+    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    this.setCurrentUser(this.currentUser);
+  }
+
   private setCurrentUser(user: any = null) {
     this.currentUserObservable.next(user);
   }

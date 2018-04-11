@@ -17,6 +17,15 @@ export class BetService {
       .then(tokenId => {
         return this.http.post<any>(this.api + '/save', {bet, tokenId}).toPromise();
       })
-    );
+    )
+    .map(response => {
+      if (response.bet) {
+        // por corregir
+        const currentUser = this.authService.getCurrentUser().getValue();
+        const bill = currentUser.bill - bet.value;
+        this.authService.updateCurrentUserBill(bill);
+        return response;
+      }
+    });
   }
 }
