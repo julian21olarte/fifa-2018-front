@@ -1,3 +1,4 @@
+import { BetService } from './services/bet.service';
 import { GameService } from './services/game.service';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -58,7 +59,8 @@ moment.locale('es-es');
   providers: [
     AuthService,
     GameService,
-    TeamService
+    TeamService,
+    BetService
   ],
   bootstrap: [AppComponent]
 })

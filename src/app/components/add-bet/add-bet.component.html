@@ -1,7 +1,7 @@
 <div class="container-fluid w-100" *ngIf="currentUser">
   <div class="row w-100">
     <div class="col-12 w-100">
-      <div class="card float-right w-100 bill-info" *ngIf="currentUser">
+      <div class="card float-right bill-info" *ngIf="currentUser">
         <div class="card-body w-100">
           Tu saldo es
           <h4 class="text-success d-inline">${{currentUser.bill}}</h4>
@@ -11,47 +11,91 @@
   </div>
 </div>
 <div class="container">
-  <div class="row">
-    <div class="col-12 d-flex justify-content-center" *ngIf="game">
-      <div class="card">
-        <div class="card-body">
-          <h4>{{game.team1.name}} VS {{game.team2.name}}</h4>
-          <div class="d-flex justify-content-around">
-            <img src="{{game.team1.img}}" alt="team1-img" class="team-img">
-            <img src="{{game.team2.img}}" alt="team2-img" class="team-img">
+  <div class="game-info">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 d-flex justify-content-center" *ngIf="game">
+        <div class="card">
+          <div class="card-body">
+            <h4>{{game.team1.name}} VS {{game.team2.name}}</h4>
+            <div class="d-flex justify-content-around">
+              <img src="{{game.team1.img}}" alt="team1-img" class="team-img">
+              <img src="{{game.team2.img}}" alt="team2-img" class="team-img">
+            </div>
+          </div>
+          <div class="card-footer">
+            <h6 class="d-inline">
+              {{game.date | amCalendar: { sameDay: '[Hoy a las] h:mm A', nextDay: '[Mañana a las] h:mm A', nextWeek: 'dddd D [de] MMMM
+              - h:mm A', lastDay: '[Ayer]', sameElse: 'dddd D [de] MMMM - h:mm A' } }}
+            </h6>
+          </div>
+        </div>
+      </div>
+      <div class="co-sm-12 col-md-6">
+        <h3 class="text-primary text-center text-md-left mt-4">Cuotas</h3>
+        <table class="table table-bordered" *ngIf="game">
+          <thead>
+            <tr>
+              <th class="text-center">{{game.team1.name}}</th>
+              <th class="text-center">{{game.team2.name}}</th>
+              <th class="text-center">Empate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center">{{game.fees.team1}}</td>
+              <td class="text-center">{{game.fees.team2}}</td>
+              <td class="text-center">6.5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="bet-config" *ngIf="bet">
+    <div class="row mt-5">
+      <div class="col-sm-12 col-md-6 d-flex justify-content-center align-items-center flex-column">
+        <h5>Tipo de apuesta: </h5>
+        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="bet.typeBet">
+          <label ngbButtonLabel class="btn-danger">
+            <input ngbButton type="radio" value="Winner"> Ganador
+          </label>
+          <label ngbButtonLabel class="btn-danger">
+            <input ngbButton type="radio" value="Result"> Marcador
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 mt-5 mt-md-0">
+        <h5 class="text-primary">Resultado del marcador: </h5>
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label for="team1Goals" class="d-block">{{game.team1.name}}</label>
+            <input type="number" min='0' name="team1Goals" class="form-control" id="team1Goals" [(ngModel)]="bet.result.team1">
+          </div>
+          <div class="form-group col-6">
+            <label for="team2Goals" class="d-block">{{game.team2.name}}</label>
+            <input type="number" min='0' name="team2Goals" class="form-control" id="team2Goals" [(ngModel)]="bet.result.team2">
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row mt-4">
-    <div class="col-12">
-      <h3 class="text-primary text-center text-md-left mt-4">Cuotas</h3>
-    </div>
-    <table class="table table-bordered" *ngIf="game">
-      <thead>
-        <tr>
-          <th class="text-center">{{game.team1.name}}</th>
-          <th class="text-center">{{game.team2.name}}</th>
-          <th class="text-center">Empate</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="text-center">{{game.fees.team1}}</td>
-          <td class="text-center">{{game.fees.team2}}</td>
-          <td class="text-center">6.5</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row mt-3">
-    <div class="col-12">
-      <div class="card" *ngIf="currentUser">
-        <div class="card-body">
-          <nouislider [connect]="[true, false]" [min]="0" [tooltips]="[true]" [max]="currentUser.bill" [(ngModel)]="betValue"></nouislider>
+  <div class="bet-value">
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="card" *ngIf="currentUser">
+          <div class="card-body">
+            <h5 class="text-primary mb-5">
+              Cuanto deseas apostar?
+            </h5>
+            <nouislider [connect]="[true, false]" [min]="0" [tooltips]="[true]" [max]="currentUser.bill" [(ngModel)]="bet.value"></nouislider>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <button type="button" class="btn btn-success text-uppercase float-right" (click)="sendBet()" >Finalizar</button>
     </div>
   </div>
 </div>

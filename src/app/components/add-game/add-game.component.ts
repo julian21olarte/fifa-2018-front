@@ -41,7 +41,9 @@ export class AddGameComponent implements OnInit {
         console.log(response);
         if (response) {
           alert(response.message);
-          this.router.navigate(['/games']);
+          if (response.game) {
+            this.router.navigate(['/games']);
+          }
         }
       });
     } else {
