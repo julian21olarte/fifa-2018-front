@@ -30,22 +30,23 @@ export class AddBetComponent implements OnInit {
       if (game) {
         this.game = game;
         console.log(this.game);
-        this.currentUser = this.authService.getCurrentUser().getValue();
-        console.log(this.currentUser);
-
-        // initialize bet
-        this.bet = {
-          game: this.game._id,
-          user: this.currentUser._id,
-          value: 1,
-          fee: this.game.fees.team1,
-          typeBet: null,
-          result: {
-            team1: 0,
-            team2: 0
-          },
-          date: this.game.date
-        };
+        this.authService.getCurrentUser()
+        .subscribe(currentUser => {
+          this.currentUser = currentUser;
+          this.bet = {
+            game: this.game._id,
+            user: this.currentUser._id,
+            value: 1,
+            fee: this.game.fees.team1,
+            typeBet: null,
+            result: {
+              team1: 0,
+              team2: 0
+            },
+            date: this.game.date
+          };
+          console.log(this.currentUser);
+        });
       }
     });
 

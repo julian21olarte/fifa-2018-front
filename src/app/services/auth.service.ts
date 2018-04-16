@@ -3,23 +3,29 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthCredential } from '@firebase/auth-types';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnInit {
 
   private currentUser: any;
   private currentUserObservable: BehaviorSubject<any>;
   private api: string;
+  private apiUser: string;
   constructor(private fireAuth: AngularFireAuth, private http: HttpClient) {
     this.api = 'http://localhost:3000/auth/login';
+    this.apiUser = 'http://localhost:3000/user/bill';
     if (localStorage.getItem('currentUser') !== null) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     this.currentUserObservable = new BehaviorSubject(this.currentUser);
+    console.log(this.fireAuth.auth.currentUser);
+  }
+
+  ngOnInit(): void {
   }
 
   public loginFacebook() {
@@ -64,9 +70,9 @@ export class AuthService {
   private loginUser() {
     return this.fireAuth.auth.currentUser.getIdToken(true)
       .then(idToken => {
-        if (localStorage.getItem('currentUser') !== null) {
-          return this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        }
+        // if (localStorage.getItem('currentUser') !== null) {
+        //   return this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        // }
         return this.http.post(this.api, { id: idToken }).toPromise()
           .then(user => {
             console.log(this.fireAuth.auth.currentUser);
@@ -74,6 +80,7 @@ export class AuthService {
             this.currentUser.name = this.fireAuth.auth.currentUser.displayName;
             this.currentUser.email = this.fireAuth.auth.currentUser.email;
             this.currentUser.image = this.fireAuth.auth.currentUser.photoURL;
+            // this.currentUser.bill = this.currentUser.bill.toFixed(2);
             localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
             return this.currentUser;
           });
@@ -133,11 +140,17 @@ export class AuthService {
   }
 
   public getCurrentUser() {
-    return this.currentUserObservable;
+    return this.fireAuth.auth.currentUser
+    ? Observable.fromPromise(this.loginUser().then(user => {
+        this.setCurrentUser(user);
+        console.log('Se actualiza el usuario');
+        return user;
+      }))
+    : this.currentUserObservable;
   }
 
   public updateCurrentUserBill(bill: number) {
-    this.currentUser.bill = bill;
+    this.currentUser.bill = bill.toFixed(2);
     localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
     this.setCurrentUser(this.currentUser);
   }

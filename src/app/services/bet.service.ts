@@ -21,9 +21,11 @@ export class BetService {
     .map(response => {
       if (response.bet) {
         // por corregir
-        const currentUser = this.authService.getCurrentUser().getValue();
-        const bill = currentUser.bill - bet.value;
-        this.authService.updateCurrentUserBill(bill);
+        this.authService.getCurrentUser()
+        .subscribe(currentUser => {
+          const bill = currentUser.bill - bet.value;
+          this.authService.updateCurrentUserBill(bill);
+        });
         return response;
       }
     });
