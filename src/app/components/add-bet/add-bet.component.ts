@@ -4,10 +4,16 @@ import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { zoomIn, flipInX } from 'ng-animate';
+
 @Component({
   selector: 'app-add-bet',
   templateUrl: './add-bet.component.html',
-  styleUrls: ['./add-bet.component.css']
+  styleUrls: ['./add-bet.component.css'],
+  animations: [
+    trigger('zoomIn', [transition('* => *', useAnimation(zoomIn))])
+  ],
 })
 export class AddBetComponent implements OnInit {
 

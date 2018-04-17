@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" *ngIf="currentUser" [@zoomIn]="zoomIn">
   <div class="row">
     <div class="col-12">
-      <div class="user-info" *ngIf="currentUser">
+      <div class="user-info">
         <div class="row">
           <div class="col-sm-12 col-md-3">
             <img src="{{currentUser.image}}" alt="user-img" class="rounded user-img-profile">

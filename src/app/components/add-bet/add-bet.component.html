@@ -1,7 +1,7 @@
-<div class="container-fluid w-100" *ngIf="currentUser">
+<div class="container-fluid w-100">
   <div class="row w-100">
     <div class="col-12 w-100">
-      <div class="card float-right bill-info" *ngIf="currentUser">
+      <div class="card float-right bill-info" [@zoomIn]="zoomIn" *ngIf="currentUser">
         <div class="card-body w-100">
           Tu saldo es
           <h4 class="text-success d-inline">${{currentUser.bill}}</h4>
@@ -10,7 +10,7 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" [@zoomIn]="zoomIn" *ngIf="currentUser">
   <div class="game-info">
     <div class="row">
       <div class="col-sm-12 col-md-6 d-flex justify-content-center" *ngIf="game">

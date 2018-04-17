@@ -69,21 +69,15 @@ export class AuthService implements OnInit {
 
   private loginUser() {
     return this.fireAuth.auth.currentUser.getIdToken(true)
-      .then(idToken => {
-        // if (localStorage.getItem('currentUser') !== null) {
-        //   return this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        // }
-        return this.http.post(this.api, { id: idToken }).toPromise()
-          .then(user => {
-            console.log(this.fireAuth.auth.currentUser);
-            this.currentUser = user;
-            this.currentUser.name = this.fireAuth.auth.currentUser.displayName;
-            this.currentUser.email = this.fireAuth.auth.currentUser.email;
-            this.currentUser.image = this.fireAuth.auth.currentUser.photoURL;
-            // this.currentUser.bill = this.currentUser.bill.toFixed(2);
-            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-            return this.currentUser;
-          });
+      .then(idToken => this.http.post(this.api, { id: idToken }).toPromise())
+      .then(user => {
+        const fireUser = this.fireAuth.auth.currentUser;
+        this.currentUser = user;
+        this.currentUser.name = fireUser.displayName;
+        this.currentUser.email = fireUser.email;
+        this.currentUser.image = fireUser.photoURL;
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        return this.currentUser;
       });
   }
 
@@ -143,7 +137,6 @@ export class AuthService implements OnInit {
     return this.fireAuth.auth.currentUser
     ? Observable.fromPromise(this.loginUser().then(user => {
         this.setCurrentUser(user);
-        console.log('Se actualiza el usuario');
         return user;
       }))
     : this.currentUserObservable;

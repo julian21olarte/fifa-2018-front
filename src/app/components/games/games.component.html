@@ -1,11 +1,13 @@
-<div class="container">
-  <div class="row" *ngIf="currentUser && currentUser.isAdmin && currentUser.isAdmin === true">
+<div class="container" *ngIf="currentUser && currentUser.isAdmin && currentUser.isAdmin === true">
+  <div class="row">
     <div class="col-sm-12">
-      <a routerLink="add" class="btn btn-primary new-game-button float-right">Nuevo Partido</a>
+      <a  routerLink="add"
+          class="btn btn-primary new-game-button float-right">Nuevo Partido
+      </a>
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-sm-6 col-md-4" *ngFor="let game of games">
+    <div class="col-12 col-sm-6 col-md-4" *ngFor="let game of games" [@flipInX]="flipInX">
       <div class="card">
         <div class="card-body">
           <h5 class="text-center">{{game.team1.name}} VS {{game.team2.name}}</h5>

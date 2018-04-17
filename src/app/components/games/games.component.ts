@@ -2,10 +2,17 @@ import { AuthService } from './../../services/auth.service';
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
 
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { zoomIn, flipInX } from 'ng-animate';
+
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
-  styleUrls: ['./games.component.css']
+  styleUrls: ['./games.component.css'],
+  animations: [
+    trigger('zoomIn', [transition('* => *', useAnimation(zoomIn))]),
+    trigger('flipInX', [transition('* => *', useAnimation(flipInX))])
+  ],
 })
 export class GamesComponent implements OnInit {
 
