@@ -134,7 +134,7 @@ export class AuthService implements OnInit {
   }
 
   public getCurrentUser() {
-    return this.fireAuth.auth.currentUser
+    return localStorage.getItem('currentUser') !== null && this.fireAuth.auth.currentUser
     ? Observable.fromPromise(this.loginUser().then(user => {
         this.setCurrentUser(user);
         return user;
@@ -144,6 +144,7 @@ export class AuthService implements OnInit {
 
   public updateCurrentUserBill(bill: number) {
     this.currentUser.bill = bill.toFixed(2);
+    console.log('EL BILL: ' + this.currentUser.bill);
     localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
     this.setCurrentUser(this.currentUser);
   }

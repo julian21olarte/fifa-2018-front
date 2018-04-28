@@ -1,13 +1,25 @@
-<div class="container" *ngIf="currentUser && currentUser.isAdmin && currentUser.isAdmin === true">
+<div class="container" [@zoomIn]="zoomIn">
   <div class="row">
     <div class="col-sm-12">
-      <a  routerLink="add"
-          class="btn btn-primary new-game-button float-right">Nuevo Partido
-      </a>
+      
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-sm-6 col-md-4" *ngFor="let game of games" [@flipInX]="flipInX">
+    <div class="col-12">
+      <h1 class="text-primary border-bottom mb-4 d-inline">
+        Partidos
+      </h1>
+      <a *ngIf="currentUser && currentUser.isAdmin && currentUser.isAdmin === true" routerLink="add" class="btn btn-primary new-game-button float-right">Nuevo Partido</a>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="search($event)" placeholder="Buscar por equipo...">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button">Buscar</button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4" *ngFor="let game of games">
       <div class="card">
         <div class="card-body">
           <h5 class="text-center">{{game.team1.name}} VS {{game.team2.name}}</h5>
@@ -28,7 +40,7 @@
               <h6 class="d-inline">Fecha: </h6>
               <p class="d-inline">
                 {{game.date | amCalendar: { sameDay: '[Hoy a las] h:mm A', nextDay: '[Mañana a las] h:mm A', nextWeek: 'dddd D [de] MMMM
-                - h:mm A', lastDay: '[Ayer]', sameElse: 'dddd D [de] MMMM - h:mm A' } }}
+                - h:mm A', lastDay: '[Ayer]', lastWeek: 'dddd D [de] MMMM - h:mm A', sameElse: 'dddd D [de] MMMM - h:mm A' } }}
               </p>
             </div>
           </div>
@@ -38,5 +50,6 @@
         </div>
       </div>
     </div>
+    <h3 class="text-danger" *ngIf="!games || !games.length">No existen juegos...</h3>
   </div>
 </div>

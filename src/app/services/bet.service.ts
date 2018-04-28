@@ -30,4 +30,8 @@ export class BetService {
       }
     });
   }
+
+  public getBetsByUserId(id: number) {
+    return this.http.get(this.api + '/' + id);
+  }
 }

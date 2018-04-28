@@ -1,19 +1,53 @@
 <div class="container" *ngIf="currentUser" [@zoomIn]="zoomIn">
   <div class="row">
+    <div class="col-12 card">
+      <div class="card-body">
+          <h1 class="text-primary border-bottom mb-4 p-3">
+              Perfil
+            </h1>
+            <div class="user-info mb-5">
+              <div class="row">
+                <div class="col-sm-12 col-md-3">
+                  <img src="{{currentUser.image}}" alt="user-img" class="rounded rounded-circle user-img-profile">
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <h3>{{currentUser.name}}</h3>
+                  <h5>{{currentUser.email}}</h5>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                  <h5>Cuenta: <span  class="text-success">${{currentUser.bill}} dolares</span></h5>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-12">
-      <div class="user-info">
-        <div class="row">
-          <div class="col-sm-12 col-md-3">
-            <img src="{{currentUser.image}}" alt="user-img" class="rounded user-img-profile">
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <h3>{{currentUser.name}}</h3>
-            <h5>{{currentUser.email}}</h5>
-          </div>
-          <div class="col-sm-12 col-md-3">
-            <h5>Cuenta: <span  class="text-success">${{currentUser.bill}} dolares</span></h5>
-          </div>
-        </div>
+      <h1 class="text-primary border-bottom mb-4 p-3">
+        Apuestas
+      </h1>
+      <div class="bets">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Equipos</th>
+              <th>Fecha</th>
+              <th>Apuesta</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="bets">
+            <tr *ngFor="let bet of bets">
+              <td>
+                <img src="{{bet.game.team1.img}}" width="28" alt="img-team">
+                {{bet.game.team1.name}} - {{bet.game.team2.name}}
+                <img src="{{bet.game.team2.img}}" width="28" alt="img-team">
+              </td>
+              <td>{{bet.date | amCalendar}}</td>
+              <td class="text-success">${{bet.value}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
