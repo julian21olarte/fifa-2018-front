@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -13,6 +13,18 @@ export class GameService {
 
   public getGames() {
     return this.http.get(this.api);
+  }
+
+  /**
+   * getGamesWithUserCheck
+   * @param userId
+   */
+  public getGamesWithUserCheck(userId = null) {
+    let params = new HttpParams();
+    if (userId) {
+      params = params.append('userId', userId);
+    }
+    return this.http.get(this.api, {params});
   }
 
   public getGameById(id: number) {

@@ -18,9 +18,10 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="games">
     <div class="col-12 col-sm-6 col-md-4" *ngFor="let game of games">
       <div class="card">
+        <i *ngIf="game.countUserBets" class="fa fa-star text-warning ml-auto p-2"></i>
         <div class="card-body">
           <h5 class="text-center">{{game.team1.name}} VS {{game.team2.name}}</h5>
           <div class="w-100 h-auto d-flex justify-content-around align-items-center">
@@ -44,7 +45,7 @@
               </p>
             </div>
           </div>
-          <button *ngIf="currentUser && game.status === 'Comming Soon'" type="button" class="btn btn-success btn-circle float-right bet-button" [routerLink]="['/bet']" [queryParams] = "{gameId: game._id}">
+          <button *ngIf="currentUser && !game.countUserBets && game.status === 'Comming Soon'" type="button" class="btn btn-success btn-circle float-right bet-button" [routerLink]="['/bet']" [queryParams] = "{gameId: game._id}">
             <span class="fa fa-usd" aria-hidden="true"></span>
           </button>
         </div>

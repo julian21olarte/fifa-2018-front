@@ -23,23 +23,20 @@ export class GamesComponent implements OnInit {
   constructor(private gameService: GameService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.gameService.getGames()
+    this.authService.getCurrentUser()
+    .switchMap(user => {
+      this.currentUser = user;
+      return (user && user._id) ? this.gameService.getGamesWithUserCheck(user._id) : this.gameService.getGames();
+    })
     .subscribe(games => {
       this.games = games as Array<any>;
       this.gamesBackup = games;
-      console.log(this.games);
-    });
-
-    this.authService.getCurrentUser()
-    .subscribe(user => {
-      this.currentUser = user;
     });
 
     this.searchText = '';
   }
 
   public getDateFormat(dateTime: number) {
-    console.log(dateTime);
     return new Date(dateTime);
   }
 
