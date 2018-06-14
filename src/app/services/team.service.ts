@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { api } from '../config';
 
 @Injectable()
 export class TeamService {
 
   private api: string;
   constructor(private http: HttpClient) {
-    this.api = 'http://localhost:3000/teams';
+    this.api = api + 'teams';
   }
 
   public getTeams() {

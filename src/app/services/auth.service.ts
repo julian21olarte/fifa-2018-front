@@ -7,6 +7,7 @@ import { Injectable, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthCredential } from '@firebase/auth-types';
+import { api } from '../config';
 
 @Injectable()
 export class AuthService implements OnInit {
@@ -16,8 +17,8 @@ export class AuthService implements OnInit {
   private api: string;
   private apiUser: string;
   constructor(private fireAuth: AngularFireAuth, private http: HttpClient) {
-    this.api = 'http://localhost:3000/auth/login';
-    this.apiUser = 'http://localhost:3000/user/bill';
+    this.api = api + 'auth/login';
+    this.apiUser = api + 'user/bill';
     if (localStorage.getItem('currentUser') !== null) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }

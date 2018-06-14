@@ -43,4 +43,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/src/app/firebase.ts
+#/src/app/firebase.ts
