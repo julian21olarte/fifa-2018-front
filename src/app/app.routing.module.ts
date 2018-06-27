@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
+import { ViewGameComponent } from './components/view-game/view-game.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
     children: [
       { path: '', component: GamesComponent },
       { path: 'add', component: AddGameComponent },
+      { path: 'view', component: ViewGameComponent },
     ]
   },
   { path: '**', component: HomeComponent }

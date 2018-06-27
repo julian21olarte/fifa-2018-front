@@ -24,7 +24,7 @@ export class BetService {
         // por corregir
         this.authService.getCurrentUser()
         .subscribe(currentUser => {
-          const bill = currentUser.bill - bet.value;
+          const bill = parseFloat((currentUser.bill - bet.value).toFixed(2));
           this.authService.updateCurrentUserBill(bill);
         });
         return response;

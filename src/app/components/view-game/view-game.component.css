@@ -1,0 +1,30 @@
+.container-fluid {
+  margin-top: 80px;
+  box-sizing: border-box;
+  padding: 15px;
+}
+.container {
+  margin-bottom: 50px;
+}
+.noUi-connect {
+  background: purple !important;
+}
+.bill-info {
+  box-shadow: 2px 3px 6px lightgray;
+}
+
+.bet-config, .bet-value {
+  margin: 70px 0;
+}
+
+.btn-danger.btn.active {
+  background-color: rgb(167, 0, 0);
+}
+
+.card {
+  min-width: 30%;
+}
+
+.results-text {
+  font-size: 1.2em;
+}

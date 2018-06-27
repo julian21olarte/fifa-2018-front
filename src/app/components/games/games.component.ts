@@ -17,7 +17,7 @@ import { zoomIn, flipInX } from 'ng-animate';
 export class GamesComponent implements OnInit {
 
   private games: Array<any>;
-  private gamesBackup: any;
+  private gamesBackup: Array<any>;
   private currentUser: any;
   private searchText: string;
   constructor(private gameService: GameService, private authService: AuthService) { }
@@ -30,7 +30,7 @@ export class GamesComponent implements OnInit {
     })
     .subscribe(games => {
       this.games = games as Array<any>;
-      this.gamesBackup = games;
+      this.gamesBackup = games as Array<any>;
     });
 
     this.searchText = '';
@@ -41,7 +41,7 @@ export class GamesComponent implements OnInit {
   }
 
   public search(event: any) {
-    if (event.target.value || event.keyCode === 8) {
+    if ((event.target.value || event.keyCode === 8) && this.gamesBackup.length) {
       const text = this.searchText.toLowerCase();
       this.games = this.gamesBackup.filter(game => {
         return game.team1.name.toLowerCase().includes(text)

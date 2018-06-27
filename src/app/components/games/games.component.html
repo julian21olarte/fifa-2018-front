@@ -48,6 +48,9 @@
           <button *ngIf="currentUser && !game.countUserBets && game.status === 'Comming Soon'" type="button" class="btn btn-success btn-circle float-right bet-button" [routerLink]="['/bet']" [queryParams] = "{gameId: game._id}">
             <span class="fa fa-usd" aria-hidden="true"></span>
           </button>
+          <button *ngIf="game.status === 'Finalized'" type="button" class="btn btn-info btn-circle float-right bet-button" routerLink="view" [queryParams] = "{gameId: game._id}">
+            <span class="fa fa-info" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
     </div>

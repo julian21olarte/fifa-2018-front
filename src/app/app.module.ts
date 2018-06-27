@@ -30,6 +30,7 @@ import { AddGameComponent } from './components/add-game/add-game.component';
 import { FormsModule } from '@angular/forms';
 import { TeamService } from './services/team.service';
 import { AddBetComponent } from './components/add-bet/add-bet.component';
+import { ViewGameComponent } from './components/view-game/view-game.component';
 
 moment.locale('es-es');
 
@@ -42,7 +43,8 @@ moment.locale('es-es');
     GamesComponent,
     ProfileComponent,
     AddGameComponent,
-    AddBetComponent
+    AddBetComponent,
+    ViewGameComponent
   ],
   imports: [
     BrowserModule,

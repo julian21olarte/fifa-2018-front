@@ -1,0 +1,50 @@
+.custom-container {
+  margin-top: 80px;
+  box-sizing: border-box;
+  padding: 0px;
+}
+
+.bet-button {
+  box-shadow: 2px 2px 5px lightgray;
+}
+
+.card-footer-game-block {
+  margin-bottom: 15px;
+}
+
+.new-game-button {
+  margin: 15px 0;
+}
+
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.card-center {
+  box-shadow: 3px 3px 9px rgb(110, 110, 110);
+  box-sizing: border-box;
+  padding: 30px;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+
+img.img-home {
+  box-shadow: 2px 4px 17px rgb(110, 110, 110);
+}
+
+.small-text, .small-text > * {
+  font-size: .94em;
+}
+
+footer {
+  background-color: #222;
+  height: 60px;
+}

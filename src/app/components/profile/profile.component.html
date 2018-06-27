@@ -48,7 +48,7 @@
               <td>{{bet.date | amCalendar}}</td>
               <td [ngClass]="{'text-danger': bet.status === 'Pending', 'text-primary': bet.status === 'Finalized'}">{{bet.status}}</td>
               <td class="text-success">${{bet.value}}</td>
-              <td [ngClass]="{'text-danger': bet.gain < 0, 'text-success': bet.gain >= 0}" *ngIf="bet.gain">{{bet.gain}}</td>
+              <td [ngClass]="{'text-danger': bet.gain < 0, 'text-success': bet.gain >= 0}" *ngIf="bet.gain">${{bet.gain}}</td>
               <td *ngIf="!bet.gain">---</td>
             </tr>
           </tbody>
